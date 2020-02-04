@@ -63,12 +63,24 @@ function smarterBoggleBoard(boggleBoard) {
   return boggleBoard
 }
 
+function dealingWithQ(boggleBoard) {
+  let elementLength = "Qu".length
+  for (let row of boggleBoard) {
+    for (let i = 0; i < row.length; i ++) {
+      if (row[i] === "Q") {
+        row[i] = "Qu"
+      }
+      row[i] = (row[i].padEnd(elementLength, " "))
+    }
+  }
+  return boggleBoard
+}
+
 let board = newBoggleBoard();
 
-shake(board);
-
-printBoggleBoard(board);
-
+//shake(board);
+//printBoggleBoard(board);
 smarterBoggleBoard(board);
-
+//printBoggleBoard(board);
+dealingWithQ(board);
 printBoggleBoard(board);
