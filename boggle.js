@@ -30,22 +30,38 @@ function shake(boggleBoard) {
 }
 
 function smarterBoggleBoard(boggleBoard) {
-  let dice = ['AAEEGN',
-    'ELRTTY',
-    'AOOTTW',
-    'ABBJOO',
-    'EHRTVW',
-    'CIMOTU',
-    'DISTTY',
-    'EIOSST',
-    'DELRVY',
-    'ACHOPS',
-    'HIMNQU',
-    'EEINSU',
-    'EEGHNW',
-    'AFFKPS',
-    'HLNNRZ',
-    'DEILRX']
+  let dice = [//'AAEEGN',
+    // 'ELRTTY',
+    // 'AOOTTW',
+    // 'ABBJOO',
+    // 'EHRTVW',
+    // 'CIMOTU',
+    // 'DISTTY',
+    // 'EIOSST',
+    // 'DELRVY',
+    // 'ACHOPS',
+    // 'HIMNQU',
+    // 'EEINSU',
+    // 'EEGHNW',
+    // 'AFFKPS',
+    // 'HLNNRZ',
+    // 'DEILRX']
+    'h',
+    'e',
+    'h',
+    'e',
+    'h',
+    'e',
+    'h',
+    'e',
+    'h',
+    'e',
+    'h',
+    'e',
+    'h',
+    'e',
+    'h',
+    'e']
     let randomLetter;
     let letterArray = [];
 
@@ -76,11 +92,61 @@ function dealingWithQ(boggleBoard) {
   return boggleBoard
 }
 
+function boggleBoardContainsWord(board,word) {
+  return boggleBoardIsInAnyRow(board, word) || getEveryColumn(board, word);
+}
+
+function arrayContainsWord(array, word) {
+  return array.join('').includes(word);
+}
+
+function boggleBoardIsInAnyRow(board, word) {
+  for (let i = 0; i < board.length; i++) {
+    if (arrayContainsWord(board[i], word)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function boggleBoardIsInAnyCol(columns,word) {
+  for (let i = 0; i < columns.length; i ++) {
+    if (columns[i].join('').includes(word)) {
+      return true
+    }
+
+  }
+  return false
+
+}
+function getCol(board, colNum) {
+  let columnValues = [];
+
+  for (let j = 0; j < board.length; j++ ) {
+    columnValues.push(board[j][colNum]);
+  }
+  return columnValues;
+}
+
+function getEveryColumn(board, word) {
+  let columns = [];
+
+  for (let i = 0; i < board.length; i++) {
+    columns.push(getCol(board, i));
+  }
+  return boggleBoardIsInAnyCol(columns,word);
+}
+
 let board = newBoggleBoard();
 
 //shake(board);
 //printBoggleBoard(board);
 smarterBoggleBoard(board);
 //printBoggleBoard(board);
+//dealingWithQ(board);
+//printBoggleBoard(board);
+console.log(boggleBoardContainsWord(board,"he"))
 dealingWithQ(board);
 printBoggleBoard(board);
+//console.log(boggleBoardContainsWord(board,"hello"))
